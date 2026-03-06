@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bizim Zamanımız ❤️</title>
+
+<style>
+body{
+    background:#ff6b81;
+    text-align:center;
+    font-family:Arial;
+    color:white;
+    overflow:hidden;
+}
+
+h1{
+    margin-top:80px;
+    font-size:40px;
+}
+
+h2{
+    font-size:28px;
+    margin-bottom:50px;
+}
+
+/* Sayaç kutusu */
+#sayac{
+    font-size:35px;
+    margin-top:40px;
+    line-height:1.8;
+}
+
+/* Kalp animasyonu */
+.kalp{
+    position:fixed;
+    bottom:-50px;
+    font-size:25px;
+    animation:yukari 6s linear infinite;
+}
+
+@keyframes yukari{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+
+/* Kalp patlaması */
+.patlama{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:50px;
+    opacity:1;
+    animation:patla 1s ease-out forwards;
+}
+
+@keyframes patla{
+    0%{transform:translate(-50%,-50%) scale(0); opacity:1;}
+    50%{transform:translate(-50%,-50%) scale(1.5); opacity:1;}
+    100%{transform:translate(-50%,-50%) scale(1); opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>A ❤️ E</h1>
+<h2>20 Şubat 2026'dan beri birlikteyiz 💞</h2>
+<p>Seninle geçirdiğim her gün bana hayatın ne kadar güzel olduğunu hatırlatıyor.</p>
+<p>Her saniye, her dakika seninle daha da özel oluyor.</p>
+<div id="sayac"></div>
+<script>
+
+// Başlangıç tarihi
+var baslangic = new Date("2026-02-20 00:00:00")
+
+// Gerçek zamanlı sayaç
+function guncelle(){
+    var simdi = new Date()
+    var fark = simdi - baslangic
+
+    var gun = Math.floor(fark / (1000*60*60*24))
+    var saat = Math.floor((fark / (1000*60*60)) % 24)
+    var dakika = Math.floor((fark / (1000*60)) % 60)
+    var saniye = Math.floor((fark / 1000) % 60)
+
+    document.getElementById("sayac").innerHTML =
+    gun + " Gün ❤️ <br>" +
+    saat + " Saat ⏰ <br>" +
+    dakika + " Dakika ⏳ <br>" +
+    saniye + " Saniye 💞"
+}
+
+setInterval(guncelle,1000)
+
+// Kalp oluşturma
+function kalpOlustur(){
+    var kalp = document.createElement("div")
+    kalp.classList.add("kalp")
+    kalp.innerHTML="A❤️E"
+    kalp.style.left = Math.random()*100 + "vw"
+    kalp.style.fontSize = (20 + Math.random()*30) + "px"
+    document.body.appendChild(kalp)
+    setTimeout(()=>{kalp.remove()},6000)
+}
+
+setInterval(kalpOlustur,300)
+
+// Kalp patlaması
+function patlama(){
+    for(let i=0;i<10;i++){
+        var p = document.createElement("div")
+        p.classList.add("patlama")
+        p.innerHTML="❤️"
+        p.style.fontSize = (30 + Math.random()*40) + "px"
+        p.style.left = (50 + (Math.random()-0.5)*40) + "%"
+        p.style.top = (50 + (Math.random()-0.5)*40) + "%"
+        document.body.appendChild(p)
+        setTimeout(()=>{p.remove()},1000)
+    }
+}
+
+// Sayfa açılınca patlama
+window.onload = ()=>{
+    patlama()
+}
+
+</script>
+
+</body>
+</html>
